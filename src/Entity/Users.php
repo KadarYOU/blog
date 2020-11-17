@@ -2,14 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\UsersRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UsersRepository::class)
+ * @UniqueEntity(fields= {"email"}, message= "Email est déjà utilisée")
  */
 class Users implements UserInterface
 {
@@ -22,25 +25,36 @@ class Users implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email()
      */
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="array")
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(min="8", minMessage="votre message doit etre minimun 8 caractérer")
+     * @Assert\EqualTo(propertyPath="confirm_password",message="vous n'avez pas tapés les memes mot de passe")
      */
     private $password;
+    /**
+     * @Assert\EqualTo(propertyPath="password",message="vous n'avez pas tapés les memes mot de passe")
+     */
     public $confirm_password;
 
     /**
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="Users", orphanRemoval=true)
      */
     private $articles;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $username;
 
     public function __construct()
     {
@@ -151,6 +165,13 @@ class Users implements UserInterface
             //     $article->setUsers(null);
             // }
         }
+
+        return $this;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }

@@ -1,8 +1,14 @@
 {% extends 'base.html.twig'%}
+
 {% block body %}
 <h1> Inscription de sité </h1>
-
-{{ form(formReg) }}
+{{ form_start(form_insp) }}
+{{ form_row(form_insp.username,{'label':'Nom d\'utilisateur','attr':{'placeholder':'Nom de \'utilisateur'}}) }}
+{{ form_row(form_insp.email,{'label':'Adress email','attr':{'placeholder':'Adress mail'}}) }}
+{{ form_row(form_insp.password,{'label':'Mot de passe','attr':{'placeholder':'Votre mot de passe'}}) }}
+{{ form_row(form_insp.confirm_password,{'label':'Confirmer','attr':{'placeholder':'Confirmer votre mot de passe'}}) }}
 <button Type ="Submit" class='btn btn-success'>s'inscrire</button>
+{{ form_end(form_insp)}}
+
 
 {% endblock body %}
