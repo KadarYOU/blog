@@ -14,7 +14,22 @@
     </div>
 </article>
 <hr>
-<h2>Ajouter un commentaire</h2>
+ <section id="commentaire">
+<h1>{{ article.content | length }} Commentaires:</h1> 
+{% for comment in article.content %}
+<div class="commentaire">
+<div class="row">
+    <div class="col-3">
+     {{ comment.email }} (<small>{{comment.createdAt| date('d/m/y') }})
+     </div>
+       <div class="col">
+        {{comment.content | raw}}
+        </div>
+  </div>
+</div>
+{% endfor %} 
+</section>
+
 {{ form_start(commentaireForm) }}
 {{form_row(commentaireForm.email)}}
 {# {{form_row(commentaireForm.pseudo)}} #}
@@ -24,6 +39,7 @@
 Envoyer
  </button>
 {{ form_end(commentaireForm) }}
+
 {% endblock body %}
    
  

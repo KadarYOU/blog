@@ -17,6 +17,12 @@ security:
     main:
       anonymous: true
       lazy: true
+      form_login:
+        login_path: security_login
+        check_path: security_login
+      logout:
+        path: security_logout
+        target: blog
       provider: app_user_provider
 
       # activate different ways to authenticate

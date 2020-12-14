@@ -6,6 +6,9 @@ use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+
+
+// use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -30,7 +33,7 @@ class Article
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\Length(min=10,max=255)   
+     * @Assert\Length(min=10)   
      * 
      * 
      */
@@ -38,10 +41,15 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      */
     private $Image;
 
+
     /**
+     *
+     * 
+     *
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -87,7 +95,7 @@ class Article
         return $this->Image;
     }
 
-    public function setImage(string $Image): self
+    public function setImage(string $Image)
     {
         $this->Image = $Image;
 

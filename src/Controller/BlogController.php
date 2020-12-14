@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\Users;
 use App\Entity\Article;
+
 use App\Entity\Commentaires;
 
 use App\Form\CommentairesFormType;
-
+use App\Repository\UsersRepository;
 use App\Repository\ArticleRepository;
 use Symfony\Component\HttpFoundation\Request;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface as ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,7 +58,7 @@ class BlogController extends AbstractController
 
         $form = $this->createFormBuilder($article)
             ->add('title')
-            ->add('content')
+            ->add('content', CKEditorType::class)
             ->add('Image')
             ->getform();
         $form->handleRequest($request);
@@ -78,6 +81,7 @@ class BlogController extends AbstractController
     }
 
 
+
     /**
      * @Route("/blog/{id}", name="blog_show")
      */
@@ -97,21 +101,35 @@ class BlogController extends AbstractController
             $commentaire->SetArticle($article);
             $commentaire->SetCreatedAT(new \DateTime('now'));
             // on instancie le doctrine 
-            $doctrine = $this->getDoctrine()->getManager();
+            // $doctrine = $this->getDoctrine()->getManager();
             // on prepare notre base de données
-            $doctrine->persist($commentaire);
+            $manager->persist($commentaire);
 
             // on envoie les données au base de données
-            $doctrine->flush();
-            // faire la rediraction 
+            $manager->flush();
+
+            // faire la redirection 
             return $this->redirectToRoute('blog_show', ['id' => $article->getId()]);
         }
 
         return $this->render(
             'blog/show.html.twig',
             [
-                'commentaireForm' => $form->CreateView()
+                'article' => $article,
+                'commentaireForm' => $form->createView()
             ]
         );
+    }
+
+    /**
+     * @Route("/profile/{id}", name="profil")
+     */
+    public function profil(UsersRepository $repo, Request $request, $id, ObjectManager $manager)
+    {
+        $user = $repo->findAll();
+        // dd($user);
+        return $this->render('blog/profil.html.twig', [
+            'profilUser' => $user
+        ]);
     }
 }
