@@ -126,6 +126,7 @@ class BlogController extends AbstractController
      */
     public function profil(UsersRepository $repo, Request $request, $id, ObjectManager $manager)
     {
+
         $user = $repo->findAll();
         // dd($user);
         return $this->render('blog/profil.html.twig', [
