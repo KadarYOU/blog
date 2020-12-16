@@ -7,7 +7,7 @@ use App\Entity\Users;
 use App\Entity\Article;
 
 use App\Entity\Commentaires;
-
+use App\Form\ArticleType;
 use App\Form\CommentairesFormType;
 use App\Repository\UsersRepository;
 use App\Repository\ArticleRepository;
@@ -55,12 +55,12 @@ class BlogController extends AbstractController
         if (!$article) {
             $article = new Article;
         }
-
-        $form = $this->createFormBuilder($article)
-            ->add('title')
-            ->add('content', CKEditorType::class)
-            ->add('Image')
-            ->getform();
+        $form = $this->createForm(ArticleType::class, $article);
+        // $form = $this->createFormBuilder($article)
+        //     ->add('title')
+        //     ->add('content', CKEditorType::class)
+        //     ->add('Image')
+        //     ->getform();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
