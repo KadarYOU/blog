@@ -1,0 +1,22 @@
+{% extends 'user.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+<div class="grix xs2">
+<div class="col-xs2">
+<h1>Modification de {{app.user.name}} {{app.user.firstname}}</h1>
+{{ form_start(form) }}
+{{ form_row(form.name,{'attr':{'placeholder':'Nom d\'utilisateur'}}) }}
+{{ form_row(form.firstname,{'attr':{'placeholder':'Prenom d\' utilisateur'}}) }}
+{{ form_row(form.email,{'attr':{'placeholder':'email d\' utilisateur'}}) }}
+{{ form_row(form.avatar,{'attr': {'placeholder': "Url de l\' avatar "}}) }}
+{# {{ form_row(form.password,{'attr': {'placeholder': "votre mot de passe"}}) }} 
+ {{ form_row(form.confirm_password,{'attr': {'placeholder': "Confirme votre mot de pass "}}) }} #}
+<button type ="submit" class="btn btn-success">
+
+ Enregistre modifications
+</button>
+{{form_end(form)}}
+</div>
+
+ 
+{% endblock %}

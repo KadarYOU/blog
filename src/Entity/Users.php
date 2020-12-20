@@ -38,7 +38,6 @@ class Users implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\Length(min="8", minMessage="votre message doit etre minimun 8 caractérer")
-     * @Assert\EqualTo(propertyPath="confirm_password",message="vous n'avez pas tapés les memes mot de passe")
      */
     private $password;
     /**
@@ -56,9 +55,30 @@ class Users implements UserInterface
      */
     private $username;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="ArticleUsers")
+     */
+    private $articles1;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatar;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->articles1 = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -172,6 +192,72 @@ class Users implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles1(): Collection
+    {
+        return $this->articles1;
+    }
+
+    public function addArticles1(Article $articles1): self
+    {
+        if (!$this->articles1->contains($articles1)) {
+            $this->articles1[] = $articles1;
+            $articles1->setArticleUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticles1(Article $articles1): self
+    {
+        if ($this->articles1->removeElement($articles1)) {
+            // set the owning side to null (unless already changed)
+            if ($articles1->getArticleUsers() === $this) {
+                $articles1->setArticleUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

@@ -54,6 +54,11 @@ class Article
      */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="articles1")
+     */
+    private $ArticleUsers;
+
 
 
 
@@ -110,6 +115,18 @@ class Article
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getArticleUsers(): ?Users
+    {
+        return $this->ArticleUsers;
+    }
+
+    public function setArticleUsers(?Users $ArticleUsers): self
+    {
+        $this->ArticleUsers = $ArticleUsers;
 
         return $this;
     }

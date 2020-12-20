@@ -42,11 +42,13 @@
                 {% if app.user %}        
                 </li>
                   <li class="nav-item">
-                    <a href="{{ path('security_logout') }}" class="navbar-brand">Déconnexion</a>
+                   <a href="{{ path ('utilisateur')}}" class="navbar-brand"> Mon Profil</a>
+                    <a href="{{ path ('security_logout') }}" class="navbar-brand">Déconnexion</a>
+                   
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a href="{{ path('inscription_registration') }}" class="navbar-brand">Inscription</a>
+                    <a href="{{ path ('inscription_registration') }}" class="navbar-brand">Inscription</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ path('security_login') }}" class="navbar-brand">Connexion</a>

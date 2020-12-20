@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Profil de {{ app.user.name}} {{ app.user.firstname}}{% endblock %}</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@1.0.0/dist/css/axentix.min.css">
+        {% block stylesheets %}{% endblock %}
+        
+    </head>
+    <body class="layout with-sidenav">
+    
+
+ <header>
+      <nav class="navbar shadow-1 primary">
+        <a href="#" target="_blank" class="navbar-brand">Mon espace</a>
+        {# <div class="navbar-menu ml-auto">
+          <a class="navbar-link" href="#">Mon profil</a>
+          <a class="navbar-link" href="#">Mes articles</a>
+          
+        </div> #}
+      </nav>
+    </header>
+ <div id="example-sidenav" data-ax="sidenav" class="sidenav shadow-1 large fixed white">
+      <div class="sidenav-header">
+        <button data-target="example-sidenav" class="sidenav-trigger"><i class="fas fa-times"></i></button>
+        <img class="sidenav-logo dropshadow-1" src="{{app.user.avatar}}" alt="Logo" />
+      </div>
+      <a class="navbar-link" href="{{path('utilisateur')}}">Mon profil</a>
+      <a class="navbar-link" href="#">Mes articles</a>
+    </div>
+<div class="container">
+{% block body %}{% endblock %}
+</div>
+
+        
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
+

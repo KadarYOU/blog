@@ -1,4 +1,7 @@
 {% extends 'base.html.twig'%}
+{% block title %}
+  Connexion
+{% endblock %}
 {% block body %}
 <h1>Connexion!</h1>
 <form action="{{path('security_login')}}"method="post">
@@ -9,6 +12,7 @@
 <input placeholder="Mot de passe" required name="_password" type="password" class="form-control">
 
 </div>
+
 <div class="form-groupe">
 <button type="submit" class="btn btn-success">connexion</button>
 </div>

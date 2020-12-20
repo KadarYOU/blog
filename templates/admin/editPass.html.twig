@@ -1,0 +1,31 @@
+{% extends 'user.html.twig' %}
+{# {% form_theme form 'bootstrap_4_layout.html.twig' %} #}
+{% block body %}
+<div class="grix xs2">
+{% for message in app.flashes('error')%}
+<div class="col-xs2">
+<div class="p-3 my-2 rounded-2 error">{{message}}</div>
+</div>
+{% endfor %}
+<div class="col-xs2">
+<h1>Modification de {{app.user.name}} {{app.user.firstname}}</h1>
+<form methode="post">
+ <div class="form-field">
+      <label for="name">Mot de passe</label>
+      <input type="password" id="pass" name="pass" class="form-control rounded-1"/>
+  </div>
+  <div class="form-field">
+      <label for="name">Comfirmer le mot de passe</label>
+      <input type="password" id="pass1" name="pass1" class="form-control rounded-1"/>
+  </div>
+  <button type ="submit" class="btn btn-success">
+
+ Enregistre modifications
+</button>
+
+</form>
+
+</div>
+
+ 
+{% endblock %}
