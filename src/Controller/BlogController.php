@@ -79,18 +79,6 @@ class BlogController extends AbstractController
             'editMode' => $article->getId() !== null
         ]);
     }
-    /**
-     * @Route("/profile/{id}", name="profil")
-     */
-    public function profil(UsersRepository $repo, Request $request, $id, ObjectManager $manager)
-    {
-
-        $user = $repo->findAll();
-        dd($user);
-        return $this->render('blog/profil.html.twig', [
-            'profilUser' => $user
-        ]);
-    }
 
 
     /**
