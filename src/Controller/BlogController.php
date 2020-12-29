@@ -25,7 +25,7 @@ class BlogController extends AbstractController
     public function index(ArticleRepository $repo)
     {
 
-
+        // test 
         $articles = $repo->findAll();
 
 
