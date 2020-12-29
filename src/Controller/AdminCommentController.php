@@ -45,21 +45,4 @@ class AdminCommentController extends AbstractController
       'form' => $form->CreateView()
     ]);
   }
-  /**
-   * @param Comment
-   * @Route("/admin/comment/{id}/delete", name="admin_comment_delete",requirements={"id":"\d+"})
-   */
-  public function delete(Commentaires $comment, EntityManagerInterface $em)
-  {
-
-    $em->remove($comment);
-    $em->flush();
-
-    $this->addFlash(
-      'success',
-      "L'annonce <strong>{$comment->getemail()}</strong> a bien été supprimée !"
-    );
-
-    $this->redirectToRoute('admin_comment');
-  }
 }
