@@ -17,7 +17,7 @@ class EditProfilType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('name', TextType::class)
+            ->add('username', TextType::class)
             ->add('firstname', TextType::class)
             ->add('avatar', TextType::class);
     }

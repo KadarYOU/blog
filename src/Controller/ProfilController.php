@@ -6,6 +6,8 @@ use App\Entity\Users;
 use App\Form\EditProfilType;
 use App\Controller\UserRepository;
 use App\Repository\UsersRepository;
+use App\Repository\ArticleRepository;
+use App\Repository\CommentairesRepository;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,18 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface as UserPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class AdminController extends AbstractController
+class ProfilController extends AbstractController
 {
-    /**
-     * @Route("/admin", name="admin")
-     */
-    public function index(): Response
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
+
     /**
      * @Route("/utilisateur", name="utilisateur")
      */
@@ -33,18 +28,13 @@ class AdminController extends AbstractController
     {
 
         // dd($test);
-        return $this->render('admin/users.html.twig');
+        return $this->render('Profil/users.html.twig');
     }
 
-    /**
-     * @Route("/profil", name="profil_user")
-     */
-    public function profil()
-    {
-        return $this->render('admin/profil.html.twig');
-    }
+
 
     /**
+     * Permet de modifier son profil
      * @Route("/user/edit_profil", name="edit_profil_user")
      * @IsGranted("ROLE_USER")
      */
@@ -68,23 +58,30 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('utilisateur');
         }
 
-        return $this->render('admin/editProfil.html.twig', [
+        return $this->render('Profil/editProfil.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
+     * Permet de modifier le mot de passe
      * @Route("/user/editpass", name="edit_pass_user")
      */
-    public function editPass(Request $request, EntityManagerInterface $em)
+    public function editPass(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder)
     {
+
+
         if ($request->isMethod('POST')) {
 
-            $em = $this->getDoctrine()->getManager();
+
             $user = $this->getUser();
 
             // on verifie si les 2 mot de passe sont identiques
             if ($request->request->get('pass') == $request->request->get('pass1')) {
+                $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('pass')));
+                $em->flush();
+                $this->addFlash('message', 'mot de passe mis à jour avec succès');
+                return $this->redirectToRoute('utilisateur');
             } else {
 
                 $this->addFlash('error', 'Les deux mots de passe ne sont pas identiques');
@@ -92,6 +89,29 @@ class AdminController extends AbstractController
         }
 
 
-        return $this->render('admin/editPass.html.twig');
+        return $this->render('Profil/editPass.html.twig');
+    }
+    /**
+     * Permet de supprimer un articles
+     * @Route("\blog\articles\{id}", name ="remove_article")
+     */
+    public function remove($id, EntityManagerInterface $em, ArticleRepository $repo, CommentairesRepository $commentaireRespository)
+    {
+        $comment = $commentaireRespository->find($id);
+
+        if ($comment !== null) {;
+            $em->remove($comment);
+            $em->flush();
+        }
+
+        $article = $repo->find($id);
+
+        // dd($article->getId());
+        $em->remove($article);
+
+        $em->flush();
+        $this->addFlash('deleteArticle', 'L\'article a bien été supprimer');
+
+        return $this->redirectToRoute('home');
     }
 }

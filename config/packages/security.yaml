@@ -14,6 +14,20 @@ security:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
+
+    admin:
+      pattern: ^/admin
+      anonymous: true
+
+      provider: app_user_provider
+
+      form_login:
+        login_path: admin_login
+        check_path: admin_login
+
+      logout:
+        path: admin_logout
+        target: home
     main:
       anonymous: true
       lazy: true
@@ -36,6 +50,7 @@ security:
 
   # Dans la partie access_control nous définissons les routes protégées
   access_control:
+    - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     # - { path: ^/admin, roles: ROLE_ADMIN }
     # - { path: ^/profile, roles: ROLE_USER }
 

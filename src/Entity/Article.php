@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * 
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
 class Article
@@ -71,7 +72,7 @@ class Article
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle()
     {
         return $this->title;
     }
@@ -83,7 +84,7 @@ class Article
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getContent()
     {
         return $this->content;
     }
@@ -95,7 +96,7 @@ class Article
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->Image;
     }
@@ -107,7 +108,8 @@ class Article
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }

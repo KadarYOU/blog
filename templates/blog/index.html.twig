@@ -11,10 +11,12 @@ Liste d' article
     <h2>{{article.title}}</h2>
     <div class="metadata">Ecrit le {{article.createdAT | date('d/m/y')}} à {{article.createdAT|date('H:i')}} dans le categorie Politique</div>
     <div class="content">
-        <img src="{{ article.image }}" alt="">
-        {{article.content | raw }}
-        <a href="{{ path('blog_show',{ 'id' : article.id })}}" class="btn btn-primary">Lire la suite</a>
+        <img src="{{ article.image }}" alt="photo de l'article">
+        {{ article.content | slice(0,200) | raw}}
+        
     </div>
+     <a href="{{ path('blog_show',{ 'id' : article.id })}}" class="btn btn-primary">Lire la suite</a>
+        <a href="{{ path('remove_article',{ 'id' : article.id })}}" class="btn btn-primary">Supprimer</a>
 </article>
 {% endfor %}
 </section>

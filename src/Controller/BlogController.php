@@ -106,20 +106,24 @@ class BlogController extends AbstractController
         $form = $this->createForm(CommentairesFormType::class, $commentaire);
         // on va recupérer les données saisies
         $form->handleRequest($request);
+
         // on va vérifie si le formulaire a été envoyé si les données sont valides 
         if ($form->isSubmitted() && $form->isValid()) {
             // ici le formulaire a été envoyer et les données sont valides
             $commentaire->SetArticle($article);
+
             $commentaire->SetCreatedAT(new \DateTime('now'));
+
             // on instancie le doctrine 
             // $doctrine = $this->getDoctrine()->getManager();
             // on prepare notre base de données
             $manager->persist($commentaire);
+            // dd($request);
 
             // on envoie les données au base de données
             $manager->flush();
 
-            // faire la redirection 
+            // // faire la redirection 
             return $this->redirectToRoute('blog_show', ['id' => $article->getId()]);
         }
 

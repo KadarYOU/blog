@@ -7,6 +7,7 @@ use App\Repository\UsersRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -50,15 +51,7 @@ class Users implements UserInterface
      */
     private $articles;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $username;
 
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $name;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -74,6 +67,11 @@ class Users implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Username;
 
     public function __construct()
     {
@@ -98,15 +96,8 @@ class Users implements UserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
-    }
+
+
 
     /**
      * @see UserInterface
@@ -189,24 +180,8 @@ class Users implements UserInterface
         return $this;
     }
 
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
 
-        return $this;
-    }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     public function getFirstname(): ?string
     {
@@ -258,6 +233,18 @@ class Users implements UserInterface
     public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->Username;
+    }
+
+    public function setUsername(string $Username): self
+    {
+        $this->Username = $Username;
 
         return $this;
     }

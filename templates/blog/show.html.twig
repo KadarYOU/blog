@@ -4,14 +4,11 @@
 {% block body %}
 <section class="article">
 <article>
-    <h2>Titre de l'article</h2>
+    <h2>{{ article.title}}</h2>
     <div class="metadata">Ecrit le 10/09/2020 à 19h00 dans le categorie Politique</div>
     <div class="content">
-        <img src="http://placehold.it/350x150" alt="">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, expedita natus. Dicta accusantium corrupti magni.</p>
-        <p>Temporibus asperiores suscipit accusantium ratione recusandae, magni, dolorum dicta architecto ut debitis quia voluptatibus dolore.</p>
-        <hr>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur atque et, dicta cum totam, sint eaque, dolore in aperiam facilis eos? Reprehenderit excepturi accusantium sequi, aperiam sint voluptatibus voluptatem optio alias, quidem ex saepe? Alias, eaque porro. Corporis debitis, quae hic beatae repellat iure earum explicabo quisquam iste animi ipsum esse ducimus ipsa dolore saepe facere maiores consectetur. Consequuntur, amet. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex consequatur, nam quia officia eius optio vel voluptates provident, sequi possimus perspiciatis est doloremque modi non maxime aliquid dolore at. Neque sapiente odit aut exercitationem itaque maxime quae, nobis commodi vel. Odio distinctio quos ducimus aut neque, at expedita rerum quae.</p>
+        <img src="{{ article.image}}" alt="">
+      {{ article.content | raw}}
     </div>
 </article>
 <hr>
@@ -21,10 +18,10 @@
 <div class="commentaire">
 <div class="row">
     <div class="col-3">
-     {{ comment.email }} (<small>{{comment.createdAt| date('d/m/y') }})
+     {{ comment.email }} (<small>{{ comment.createdAt| date('d/m/y') }})
      </div>
        <div class="col">
-        {{comment.content | raw}}
+        {{comment.content | raw }}
         </div>
   </div>
 </div>

@@ -1,10 +1,11 @@
 {% extends 'base.html.twig'%}
 {% block title %}
-  Connexion
+  Connexion au site
 {% endblock %}
 {% block body %}
-<h1>Connexion!</h1>
-<form action="{{path('security_login')}}"method="post">
+      <h1>Connectez vous</h1>
+
+<form action="{{ path('security_login') }}"method="post">
 <div class="form-groupe">
 <input placeholder="Adress email" required name="_username" type="text" class="form-control">
 </div>
@@ -15,6 +16,7 @@
 
 <div class="form-groupe">
 <button type="submit" class="btn btn-success">connexion</button>
+ <a class="navbar-link" href="{{ path ('inscription_registration') }}">Je n'ai pas de compte</a>
 </div>
 </form>
 

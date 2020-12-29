@@ -43,7 +43,7 @@ class Commentaires
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="Commentaires")
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="Commentaires", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
@@ -112,6 +112,8 @@ class Commentaires
 
         return $this;
     }
+
+
 
     public function getArticle(): ?Article
     {

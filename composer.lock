@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "59ea664da8b42c3774c11c3b6bd7eca2",
+    "content-hash": "8ad7364824b68db5e84e45aa4aee461f",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1457,16 +1457,16 @@
         },
         {
             "name": "easycorp/easyadmin-bundle",
-            "version": "v3.1.8",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
-                "reference": "ce9a162fad46baafba9eaa331ee485b2949c21b3"
+                "reference": "8344c559b3650972cbf5f78ffad89b8dd687d94f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/ce9a162fad46baafba9eaa331ee485b2949c21b3",
-                "reference": "ce9a162fad46baafba9eaa331ee485b2949c21b3",
+                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/8344c559b3650972cbf5f78ffad89b8dd687d94f",
+                "reference": "8344c559b3650972cbf5f78ffad89b8dd687d94f",
                 "shasum": ""
             },
             "require": {
@@ -1477,7 +1477,7 @@
                 "doctrine/persistence": "^1.3.3 || ^2.0",
                 "ext-json": "*",
                 "nikic/php-parser": "^4.3|^4.4",
-                "php": "^7.2.5",
+                "php": ">=7.2.5",
                 "symfony/asset": "^4.4|^5.0",
                 "symfony/cache": "^4.4|^5.0",
                 "symfony/config": "^4.4|^5.0",
@@ -1501,7 +1501,8 @@
                 "doctrine/dbal": "<2.10"
             },
             "require-dev": {
-                "dg/bypass-finals": "^1.2",
+                "dama/doctrine-test-bundle": "^6.4",
+                "doctrine/doctrine-fixtures-bundle": "^3.4",
                 "psr/log": "~1.0",
                 "symfony/browser-kit": "^4.4|^5.0",
                 "symfony/css-selector": "^4.4|^5.0",
@@ -1538,7 +1539,7 @@
             ],
             "support": {
                 "issues": "https://github.com/EasyCorp/EasyAdminBundle/issues",
-                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.1.8"
+                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.2.0"
             },
             "funding": [
                 {
@@ -1546,7 +1547,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-18T07:15:20+00:00"
+            "time": "2020-12-22T19:28:50+00:00"
         },
         {
             "name": "egulias/email-validator",
